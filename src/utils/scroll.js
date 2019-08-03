@@ -14,10 +14,11 @@ function scrollTo(scrollElement, top) {
  * @param {Element} menuItemElement - menu item dom node
  */
 export function scrollIntoView(menuElement, menuItemElement) {
+  const menuItemRect = menuItemElement.current.getBoundingClientRect();
   const menuRect = menuElement.current.getBoundingClientRect();
-  const focusedRect = menuItemElement.current.getBoundingClientRect();
   const overScroll = menuItemElement.current.offsetHeight / 3;
-  if (focusedRect.bottom + overScroll > menuRect.bottom) {
+  if (menuItemRect.bottom + overScroll > menuRect.bottom) {
+    // next of last visible element available
     // scroll down
     scrollTo(
       menuElement,
@@ -29,7 +30,7 @@ export function scrollIntoView(menuElement, menuItemElement) {
         menuElement.current.scrollHeight
       )
     );
-  } else if (focusedRect.top - overScroll < menuRect.top) {
+  } else if (menuItemRect.top - overScroll < menuRect.top) {
     // scroll up
     scrollTo(
       menuElement,

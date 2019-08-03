@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MagnifyIcon from "mdi-react/MagnifyIcon";
-
+import CloseIcon from "mdi-react/CloseIcon";
 /**
  * This is React functional Stateless Component
  * It will render input component
@@ -11,9 +11,15 @@ import MagnifyIcon from "mdi-react/MagnifyIcon";
  * @returns {ReactComponent}
  */
 function Input({ handelSearch, value }) {
+  /**
+   * Clear input's value 
+   */
+  const clearInput = () => {
+    handelSearch({ target: { value: "" } });
+  };
   return (
     <div className="input__wrapper">
-      <MagnifyIcon size={20} />
+      <MagnifyIcon size={20} className="magnify-ico" />
       <input
         className="input__box"
         type="text"
@@ -21,6 +27,9 @@ function Input({ handelSearch, value }) {
         onChange={handelSearch}
         value={value}
       />
+      {value && (
+        <CloseIcon size={20} className="close-ico" onClick={clearInput} />
+      )}
     </div>
   );
 }
